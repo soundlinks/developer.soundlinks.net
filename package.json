@@ -1,0 +1,16 @@
+{
+  "name": "developer.soundlinks.net",
+  "version": "1.0.0",
+  "description": "Soundlinks developers website",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "dist:rm": "rm -rf docs/.vuepress/dist/*"
+  },
+  "author": "Soundlinks",
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^0.14.8"
+  }
+}
