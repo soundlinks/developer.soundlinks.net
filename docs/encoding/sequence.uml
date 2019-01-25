@@ -1,0 +1,13 @@
+title Soundlinks Encoding Service
+
+note left of You: Token as request data
+
+note left of You: Prepare media URL
+You->+Soundlinks: Request encoding media
+Soundlinks-->-You: Response query info
+
+note left of You: after a few minutes
+You->+Soundlinks: Query encoding result
+Soundlinks-->-You: Response encoded media
+
+note left of You: Validate

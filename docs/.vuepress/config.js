@@ -33,6 +33,7 @@ module.exports = {
             '/introduction/',
             '/ios/',
             '/android/',
+            '/encoding/',
         ],
         lastUpdated: 'Last Updated',
     }
