@@ -1,6 +1,6 @@
 module.exports = {
     title: 'Soundlinks Developers',
-    description: 'Just playing around',
+    description: 'SDK & API docs for developers to enlarge the power of Soundlinks.',
     head: [
         ['link', { rel: 'icon', href: '/favicon.png' }],
     ],
@@ -11,7 +11,7 @@ module.exports = {
                 link: '/introduction/',
             },
             {
-                text: '联系方式',
+                text: '联系我们',
                 items: [
                     {
                         text: 'Email',
@@ -39,6 +39,7 @@ module.exports = {
             '/android/',
             '/encoding/',
         ],
+        displayAllHeaders: true,
         lastUpdated: 'Last Updated',
     }
 }
