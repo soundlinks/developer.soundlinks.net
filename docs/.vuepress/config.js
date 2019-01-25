@@ -7,15 +7,19 @@ module.exports = {
     themeConfig: {
         nav: [
             {
-                text: 'Start here',
+                text: '开始使用',
                 link: '/introduction/',
             },
             {
-                text: 'Contact',
+                text: '联系方式',
                 items: [
                     {
                         text: 'Email',
                         link: 'mailto:dev@soundlinks.net',
+                    },
+                    {
+                        text: 'GitHub',
+                        link: 'https://github.com/soundlinks/developer.soundlinks.net/issues/new',
                     },
                     {
                         text: 'Telegram',
