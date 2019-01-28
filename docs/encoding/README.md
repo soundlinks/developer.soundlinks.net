@@ -8,7 +8,7 @@ sidebarDepth: 1
 
 ![Soundlinks Encoding Service Diagram](./sequence.png)
 
-## 如何请求 API
+## 如何请求编码 API
 
 请求 API 的参数将用 [JWT（JSON Web Tokens）](https://jwt.io/) 进行传输，以验证使用方的身份和参数的合法性。开发者可根据使用环境选择合适的库进行接下来的步骤。
 
@@ -72,11 +72,11 @@ const token = jwt.sign({
 
 ```json
 {
-    "data": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJteV9hcHBfaWQiLCJpYXQiOjE1NDgzOTcxNzgsIm10ZCI6IlBPU1QiLCJ1cmwiOiIvdjMvc2wvZW5jb2RpbmciLCJhcmciOnsic3JjIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9zb25nLm1wMyJ9fQ.tanOKe7K1icfRGQq2B-xMeJevKieYFQlO8uHyIuQamE"
+    "data": <token>
 }
 ```
 
-## API - 自动编码
+## API - 开始自动编码（未开放）
 
 ### 请求
 
@@ -97,7 +97,7 @@ POST /v3/sl/encoding
 | ----- | ---- | ---- |
 | query | string | 查询凭证 |
 
-## API - 查询编码结果
+## API - 查询编码结果（未开放）
 
 ### 请求
 
