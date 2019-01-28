@@ -6,28 +6,31 @@ sidebarDepth: 1
 
 ## 快速集成
 
-1. 解压 zip 文件得到 **libSoundlinksSDK.a** 和 **SLNeoRecognizer.h** 两个文件
-2. Xcode -> File -> Add Files to "Your Project"，在弹出面板中选择上一步下载的两个文件 -> Add（勾选“Copy items if needed”）
-3. 选中 Info.plist -> Open As -> Source Code，在其中
+### 使用 CocoaPods
 
-添加麦克风使用权限
+```bash
+$ pod setup # 推荐
+$ pod 'Soundlinks-iOS-SDK'
+```
+
+不要忘记检查是否已添加麦克风使用权限：
 
 ```xml
 <key>NSMicrophoneUsageDescription</key>
 <string>接入 SOUNDLINKS 服务需要打开麦克风</string>
 ```
 
-## 基本用法
+## 使用方法
 
 ### 初始化
 
-在一个 ViewController 中识别 Soundlinks，像这样开始：
+初始化一个 `SLRecognizer`，像这样开始：
 
 ```objectivec
 #import "ViewController.h"
-#import "SLNeoRecognizer.h"
+#import "SLRecognizer.h"
 
-@interface ViewController() <SLNeoRecognizerDelegate>
+@interface ViewController() <SLRecognizerDelegate>
 
 @end
 
@@ -36,8 +39,8 @@ sidebarDepth: 1
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[SLNeoRecognizer sharedInstance] initWithAppId:@"APP_ID" appKey:@"APP_KEY"];
-    [SLNeoRecognizer sharedInstance].delegate = self;
+    [[SLRecognizer sharedInstance] initWithAppId:@"APP_ID" appSecret:@"APP_SECRET"];
+    [SLRecognizer sharedInstance].delegate = self;
 }
 
 @end
@@ -46,32 +49,35 @@ sidebarDepth: 1
 ### 开始识别
 
 ```objectivec
-[[SLNeoRecognizer sharedInstance] enable];
+[[SLRecognizer sharedInstance] enable];
 ```
 
-### 识别结果回调
+### 识别结果的代理
 
 ```objectivec
-- (void)recognizer:(SLNeoRecognizer *)recognizer code:(NSString *)code
+- (void)recognizer:(SLRecognizer *)recognizer code:(NSString *)code
 {
     NSLog(@"Soundlinks code = %@", code);
 }
 ```
 
+识别到的 `code` 并不可读，需要调用下一步的方法。
+
 ### 获取 token
 
+将上一步代理方法中的 `code` 转换成用来请求数据的 `token`，其有效期为 5 分钟。在有效期内可使用该 `token` 请求[识别结果 API](/result/) 以获取歌曲最终的 Soundlinks 信息。
+
 ```objectivec
-// 有效时间 5 分钟
-NSString *token = [[SLNeoRecognizer sharedInstance] getTokenWithCode:code];
+NSString *token = [[SLRecognizer sharedInstance] getTokenWithCode:code];
 ```
 
 ### 停止识别
 
 ```objectivec
-[[SLNeoRecognizer sharedInstance] disable];
+[[SLRecognizer sharedInstance] disable];
 ```
 
-## 反馈问题
+## 反馈建议
 
-[提交问题](https://github.com/soundlinks/Soundlinks-iOS-SDK/issues/new) 后我们会及时处理。
+有任何问题和建议请在此[提出](https://github.com/soundlinks/Soundlinks-iOS-SDK/issues/new) ，我们会及时处理。
 

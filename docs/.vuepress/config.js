@@ -37,6 +37,7 @@ module.exports = {
             '/introduction/',
             '/ios/',
             '/android/',
+            '/result/',
             '/encoding/',
         ],
         displayAllHeaders: true,
