@@ -6,35 +6,25 @@ sidebarDepth: 1
 
 ## 快速集成
 
-### 添加 AAR 文件
-
-1. 复制 aar 文件到`libs`目录。
-2. 在项目`builde.gradle`声明`libs`目录。
-   ```groovy
-   repositories {
-       flatDir {
-           dirs 'libs'
-       }
-   }
-   ```
-3. 在项目`builde.gradle`添加 aar 依赖。
-   ```groovy
-   dependencies {
-       compile(name:'soundlinkssdk-release', ext:'aar')
-   }
-   ```
-
 ### 配置 gradle
 
-在项目 `build.gradle` 添加：
+1. 在项目下的 `build.gradle` 添加：
+
+```groovy
+allprojects {
+    repositories {
+        maven {
+            url 'https://raw.githubusercontent.com/soundlinks/Soundlinks-Android-SDK/master'
+        }
+    }
+}
+```
+
+2. 在 app 下的 `build.gradle` 添加：
 
 ```groovy
 dependencies {
-    api 'io.jsonwebtoken:jjwt-api:0.10.5'
-    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.10.5'
-    runtimeOnly('io.jsonwebtoken:jjwt-orgjson:0.10.5') {
-        exclude group: 'org.json', module: 'json' //provided by Android natively
-    }
+    implementation 'net.soundlinks:soundlinksSDK:1.0.0'
 }
 ```
 
@@ -42,7 +32,6 @@ dependencies {
 
 ```xml
 <!-- 配置麦克风权限 -->
-<uses-permission android:name="android.permission.INTERNET"/>
 <uses-permission android:name="android.permission.RECORD_AUDIO"/>
 <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
 
@@ -51,46 +40,26 @@ dependencies {
 <meta-data android:name="SOUNLINKS_APPSECRET" android:value="appSecret"/>
 ```
 
-### 添加 so 文件
+## 使用方法
 
-有两种方法可以往项目中添加 so 文件：
-
-#### 方法一
-
-在下载的开发包中拷贝需要的 CPU 架构对应的 so 文件文件夹到 `app/libs` 目录下，在 `app` 目录下的 **build.gradle** 文件中 `android` 块中配置 `sourceSets` 标签，如果没有使用该标签则新增，详细配置代码如下：
-
-```groovy
-sourceSets {
-    main {
-        jniLibs.srcDir 'libs'
-    }
-}
-```
-
-#### 方法二
-
-在 `src/main/` 目录下新建 `jniLibs` 目录（如果你的项目中已经包含该目录不用重复创建），在下载的开发包中拷贝项目中需要的 CPU 架构对应的 so 文件文件夹到 `jniLibs` 目录。
-
-## 基本用法
-
-### Application 类初始化
+### 初始化
 
 ```java
-Soundlinks.init(this, appId, appKey, false);
+Soundlinks.init(this, appId, appSecret, false);
 ```
 
-配置字段说明
+参数说明：
 
 | 参数 | 说明 |
 |:----:|:----: |
-| Context context | 上下文 |
-| String appId | appId，可在清单文件配置 |
-| String appKey | appKey，可在清单文件配置 |
-| Boolean isLog | 是否开启日志 |
+| `Context context` | 上下文 |
+| `String appId` | APP_ID，可在清单文件配置 |
+| `String appSecret` | APP_SECRET，可在清单文件配置 |
+| `Boolean isLog` | 是否开启日志 |
 
 ### 创建 `SLRecognizer`
 
-创建`SoundLinksRecognizer`实例，并注册回调监听。
+创建 `SoundLinksRecognizer` 实例，并注册回调监听。
 
 ```java
 SLRecognizer recognizer = new SLRecognizer(new SLRecognizerListener() {
@@ -98,12 +67,10 @@ SLRecognizer recognizer = new SLRecognizer(new SLRecognizerListener() {
     public void onResult(int code) {
 
     }
-    @Override
-    public void onError(int i, String s) {
-
-    }
 });
 ```
+
+识别到的 `code` 并不可读，需要调用下方生成 token 的方法。
 
 ### 开始识别
 
@@ -119,12 +86,19 @@ recognizer.stop();
 
 ### 生成 token
 
+将回调中的 `code` 转换成用来请求数据的 `token`，其有效期为 5 分钟。在有效期内可使用该 `token` 请求「[识别结果 API](/result/)」以获取歌曲最终的 Soundlinks 信息。
+
 ```java
-// 传入识别到的 code 生成 token
 String token = SoundlinksJWT.getInstance().generateToken(code);
 ```
 
-## 代码混淆
+::: tip 为什么识别结果要分 code 和 token？
+`code` 相当于歌曲的 ID，每首歌都不同；`token` 一是考虑到每个 APP 的应用场景都不同，所以由开发者自行决定网络请求的时机；二是为了省去开发者自行生成签名麻烦，所以封装了生成 `token` 的方法。
+:::
+
+### ProGuard
+
+根据你的 ProGuard 配置，可以添加以下内容：
 
 ```
 # soundlinks
@@ -142,6 +116,6 @@ String token = SoundlinksJWT.getInstance().generateToken(code);
 -dontwarn org.bouncycastle.**
 ```
 
-## 反馈问题
+## 反馈建议
 
-[提交问题](https://github.com/soundlinks/Soundlinks-Android-SDK/issues/new) 后我们会及时处理。
+有任何问题和建议请在此[提出](https://github.com/soundlinks/Soundlinks-Android-SDK/issues/new) ，我们会及时处理。
