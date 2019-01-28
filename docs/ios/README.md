@@ -8,9 +8,14 @@ sidebarDepth: 1
 
 ### 使用 CocoaPods
 
+```ruby
+# Podfile
+pod 'Soundlinks-iOS-SDK'
+```
+
 ```bash
-$ pod setup # 推荐
-$ pod 'Soundlinks-iOS-SDK'
+$ pod setup    # 推荐
+$ pod install
 ```
 
 不要忘记检查是否已添加麦克风使用权限：
