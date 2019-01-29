@@ -2,33 +2,33 @@
 sidebarDepth: 1
 ---
 
-# 编码 API
+# Encoding API
 
-你可以使用我们的编码服务来创建属于自己的带有 Soundlinks 的歌曲。流程如下图所示：
+You can use our encoding service to create your own song with Soundlinks. The process is as the following diagram:
 
 ![Soundlinks Encoding Service Diagram](./sequence.png)
 
-## 如何请求编码 API
+## How to request encoding API
 
-请求 API 的参数将用 [JWT（JSON Web Tokens）](https://jwt.io/) 进行传输，以验证使用方的身份和参数的合法性。开发者可根据使用环境选择合适的库进行接下来的步骤。
+All API parameters will be transmitted using [JWT (JSON Web Tokens)](https://jwt.io/) to verify user's credentials and parameter's legality. The developers may choose any libraries as they wish depending on the development environment before proceeding to next steps.
 
-以下生成 JWT 的方法以 Node.js 为例，其它语言和环境也是类似的。如果在生成 JWT 时遇到任何问题，请联系我们。
+The following example is based on Node.js, and other language and environment is similar. If you have any issues when generating JWT, please contact us for help.
 
-### 1. 准备 `APP_ID` 和 `APP_SECRET`
+### 1. Preparing `APP_ID` and `APP_SECRET`
 
-经过认证的开发者将分配到一组 `APP_ID` 和 `APP_SECRET`，请发送邮件至 [dev@soundlinks.net](mailto:dev@soundlinks.net) 申请。
+A verified developer will get `APP_ID` and `APP_SECRET`. Please send email to [dev@soundlinks.net](mailto:dev@soundlinks.net) for the request.
 
-### 2. 安装 JWT 库
+### 2. Installing JWT library
 
-以 [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) 为例：
+Install [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken):
 
 ```bash
 $ npm install -S jsonwebtoken
 ```
 
-### 3. 构成 JWT header
+### 3. Construct JWT header
 
-签名加密算法使用 HMAC SHA256，即通常的默认算法：
+The encryption method for signature is using HMAC SHA256. Just keep the default algorithm:
 
 ```json
 {
@@ -37,17 +37,17 @@ $ npm install -S jsonwebtoken
 }
 ```
 
-### 4. 构成 JWT payload
+### 4. Construct JWT payload
 
-必需的 JWT payload 包括：
+Required JWT payload including:
 
-- `iss`：即 `APP_ID`
-- `iat`：请求当时的时间戳
-- `mtd`：API 的请求方法，GET、POST、PUT 等等，请统一用大写
-- `url`：API 的请求 URL
-- `arg`：API 的请求参数
+- `iss` Your `APP_ID`
+- `iat` The current timestamp to request data
+- `mtd` API's HTTP method, like GET, POST, PUT, etc (uppercase)
+- `url` API's request URL
+- `arg` API's request parameters
 
-以**自动编码 API** 为例，生成完整 JWT 的代码如下：
+Taking "Auto encoding API" for example, the complete code to generate JWT is like the following:
 
 ```js
 const jwt = require("jsonwebtoken");
@@ -64,11 +64,11 @@ const token = jwt.sign({
 }, APP_SECRET);
 ```
 
-[在线 Demo](https://runkit.com/wyudong/jwt-demo)。
+[Live Demo](https://runkit.com/wyudong/jwt-demo).
 
-### 5. 开始请求
+### 5. Starting request
 
-请求时，在 headers 里设置 `Content-Type:application/json`，然后将上一步生成的 `token` 作为 `data` 放在 body 里进行请求，即：
+When ready to request, set `Content-Type:application/json` in the request header and put `token` generated in the last step as `data` in the request body.
 
 ```json
 {
@@ -76,52 +76,52 @@ const token = jwt.sign({
 }
 ```
 
-## API - 开始自动编码（未开放）
+## API - Start auto encoding (work in progress)
 
-### 请求
+### Request
 
-该接口仅接受歌曲链接，所以需要事先把待编码的歌曲上传到远端服务器。
+This API only accepts media link as one of parameter, so you need to upload the song waiting for encoding to a remote server in advance.
 
 ```
 POST /v3/sl/encoding
 ```
 
-| 字段 | 类型 | 备注 |
+| Parameter | Type | Comment |
 | ----- | ---- | ---- |
-| src | string | 歌曲链接 |
-| artist | string | 作者名字 |
+| src | string | Link of song |
+| artist | string | Artist's name |
 
-### 返回
+### Response
 
-| 字段 | 类型 | 备注 |
+| Parameter | Type | Comment |
 | ----- | ---- | ---- |
-| query | string | 查询凭证 |
+| query | string | Query credential |
 
-## API - 查询编码结果（未开放）
+## API - Query encoding result (work in progress)
 
-### 请求
+### Request
 
 ```
 POST /v3/sl/query
 ```
 
-| 字段 | 类型 | 备注 |
+| Parameter | Type | Comment |
 | ----- | ---- | ---- |
-| query | string | 查询凭证 |
+| query | string | Query credential |
 
-### 返回
+### Response
 
-返回的编码状态有以下可能：
+These are the possible encoding status:
 
 - processing
 - complete
 - failed
 
-| 字段 | 类型 | 备注 |
+| Parameter | Type | Comment |
 | ----- | ---- | ---- |
-| status | string | 编码状态 |
-| message | string | 编码信息 |
+| status | string | Encoding status |
+| message | string | Encoding message |
 
-## 验证 Soundlinks
+## Verifying Soundlinks
 
-请使用 [SOUNDLINKS APP](https://soundlinks.net/apps) 或者集成我们的 SDK 后进行验证。
+For verifying Soundlinks, please use the [SOUNDLINKS APP](https://soundlinks.net/apps) or integrate with our SDK.

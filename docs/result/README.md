@@ -2,25 +2,25 @@
 sidebarDepth: 1
 ---
 
-# 识别结果 API
+# Recognition result API
 
-## API - 获取识别结果
+## API - Get recognition result
 
-适用于 iOS & Android SDK 获取 Soundlinks 识别结果。
+For iOS & Android SDK to get recognition result of Soundlinks.
 
-### 请求
+### Request
 
 ```
 POST /v3/sl/result
 ```
 
-| 字段 | 类型 | 备注 |
+| Parameter | Type | Comment |
 | ----- | ---- | ---- |
-| data | string | 数据 token |
+| data | string | Data token |
 
-### 返回
+### Response
 
-| 字段 | 类型 | 备注 |
+| Parameter | Type | Comment |
 | ----- | ---- | ---- |
-| media | object | 版权信息 |
-| links | object | 媒体链接 |
+| media | object | Copyright information |
+| links | object | Media links |

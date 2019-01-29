@@ -4,9 +4,9 @@ sidebarDepth: 1
 
 # iOS SDK
 
-## 快速集成
+## Installation
 
-### 使用 CocoaPods
+### Using CocoaPods
 
 ```ruby
 # Podfile
@@ -14,22 +14,22 @@ pod 'Soundlinks-iOS-SDK'
 ```
 
 ```bash
-$ pod setup    # 推荐
+$ pod setup    # recommended
 $ pod install
 ```
 
-不要忘记检查是否已添加麦克风使用权限：
+Don't forget checking whether microphone usage description has been added in app's **Info.plist** file:
 
 ```xml
 <key>NSMicrophoneUsageDescription</key>
-<string>接入 SOUNDLINKS 服务需要打开麦克风</string>
+<string>Using SOUNDLINKS service needs to enable your microphone</string>
 ```
 
-## 使用方法
+## Usage
 
-### 初始化
+### Initialization
 
-初始化一个 `SLRecognizer`，像这样开始：
+Firstly initialize `SLRecognizer` like this：
 
 ```objectivec
 #import "ViewController.h"
@@ -51,13 +51,13 @@ $ pod install
 @end
 ```
 
-### 开始识别
+### Starting recognizer
 
 ```objectivec
 [[SLRecognizer sharedInstance] enable];
 ```
 
-### 识别结果的代理
+### Delegate for the result
 
 ```objectivec
 - (void)recognizer:(SLRecognizer *)recognizer code:(NSString *)code
@@ -66,27 +66,32 @@ $ pod install
 }
 ```
 
-识别到的 `code` 并不可读，需要调用下一步的方法。
+The `code` here is not readable, you need to invoke the method of generating `token` followed.
 
-### 生成 token
+### Generating token
 
-将上一步代理方法中的 `code` 转换成用来请求数据的 `token`，其有效期为 5 分钟。在有效期内可使用该 `token` 请求「[识别结果 API](/result/)」以获取歌曲最终的 Soundlinks 信息。
+Convert `code` got in the delegate to `token` in order to request data, which will be expired in 5 minutes. During that period of time, you can get final Soundlinks information with the `token` by requesting [Recognition result API](/result/).
 
 ```objectivec
 NSString *token = [[SLRecognizer sharedInstance] getTokenWithCode:code];
 ```
 
-::: tip 为什么识别结果要分 code 和 token？
-`code` 相当于歌曲的 ID，每首歌都不同；`token` 一是考虑到每个 APP 的应用场景都不同，所以由开发者自行决定网络请求的时机；二是为了省去开发者自行生成签名麻烦，所以封装了生成 `token` 的方法。
+::: tip Why code and token？
+
+`code` is like a song's ID which is unique for each one. `token` is used for two reasons:
+
+- Every APP has its different usage, so we let developers to decide when to fire the network request.
+- To save the time for developers to generate signature by themselves, we wrap up this method to generate `token`.
+
 :::
 
-### 停止识别
+### Stopping recognizer
 
 ```objectivec
 [[SLRecognizer sharedInstance] disable];
 ```
 
-## 反馈建议
+## Feedback
 
-有任何问题和建议请在此[提出](https://github.com/soundlinks/Soundlinks-iOS-SDK/issues/new) ，我们会及时处理。
+If you have any issues or suggestions, please [submit here](https://github.com/soundlinks/Soundlinks-iOS-SDK/issues/new) and we are ready to help.
 
