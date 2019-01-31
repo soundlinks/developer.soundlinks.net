@@ -2,14 +2,14 @@
 sidebarDepth: 1
 ---
 
-# Generate token
+# Generating token
 
 ::: tip We have made it easier
 
 When you get here, it's assumed that you have already known how to generate the data token with our SDK. If not, please read:
 
-- [Generate token with iOS SDK](/ios/#generating-token)
-- [Generate token with Android SDK](/android/#generating-token)
+- [Generating token with iOS SDK](/ios/#generating-token)
+- [Generating token with Android SDK](/android/#generating-token)
 
 :::
 

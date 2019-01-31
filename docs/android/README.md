@@ -57,7 +57,7 @@ Arguments notes:
 | `String appSecret` | APP_SECRET，configurable in manifest |
 | `Boolean isLog` | Log on/off |
 
-### Create `SLRecognizer`
+### Creating `SLRecognizer`
 
 Create an `SLRecognizer` instance and register callback:
 
