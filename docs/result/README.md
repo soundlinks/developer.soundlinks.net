@@ -14,6 +14,8 @@ For iOS & Android SDK to get recognition result of Soundlinks.
 POST /v3/sl/result
 ```
 
+#### Parameters for request
+
 | Parameter | Type | Comment |
 | ----- | ---- | ---- |
 | data | string | Data token |

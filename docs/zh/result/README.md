@@ -14,6 +14,8 @@ sidebarDepth: 1
 POST /v3/sl/result
 ```
 
+#### 请求参数
+
 | 字段 | 类型 | 备注 |
 | ----- | ---- | ---- |
 | data | string | 数据 token |
