@@ -100,6 +100,7 @@ String token = SoundlinksJWT.getInstance().generateToken(code);
 - To save the time for developers to generate signature by themselves, we wrap up this method to generate `token`.
 
 :::
+
 ### ProGuard
 
 Depending on your ProGuard config and usage, you may need to include the following lines:

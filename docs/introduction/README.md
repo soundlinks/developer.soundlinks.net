@@ -17,5 +17,7 @@ For mobile phones, we provide [iOS](/ios/) and [Android](/android/) SDK to recog
 To create a new song with Soundlinks, you can request "[Encoding API](/encoding/)".
 
 ::: tip Note
+
 The open API is a simplified version of Soundlinks encoding service. You cannot set media links of a song by API or use [Soundchains](https://soundchains.net) blockchains. If you want the full version, please [sign up Soundlinks account](https://soundlinks.net/songs) and apply to be one of our musicians.
+
 :::

@@ -93,7 +93,9 @@ String token = SoundlinksJWT.getInstance().generateToken(code);
 ```
 
 ::: tip 为什么识别结果要分 code 和 token？
+
 `code` 相当于歌曲的 ID，每首歌都不同；`token` 一是考虑到每个 APP 的应用场景都不同，所以由开发者自行决定网络请求的时机；二是为了省去开发者自行生成签名麻烦，所以封装了生成 `token` 的方法。
+
 :::
 
 ### ProGuard

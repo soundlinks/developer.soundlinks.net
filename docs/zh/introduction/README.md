@@ -17,5 +17,7 @@ sidebarDepth: 1
 如果要创建新的 Soundlinks 歌曲，可以请求「[编码 API](/encoding/)」。
 
 ::: tip 说明
+
 开放的 API 是 Soundlinks 编码服务的简化版，无法通过 API 设置歌曲媒体链接，也无法获得 [Soundchains](https://soundchains.net) 区块链登记。如要享受完整服务，请[注册 Soundlinks 账号](https://soundlinks.net/songs)并申请成为音乐人。
+
 :::
