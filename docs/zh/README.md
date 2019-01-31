@@ -1,3 +1,7 @@
+---
+editLink: false
+---
+
 # 基于 Soundlinks 创建应用
 
 我们知道单凭一家之力，无法发挥 Soundlinks 技术的最大潜力。所以我们向社区提供 SDK 和 API，旨在让 Soundlinks 集成到更多的应用中去。带有 Soundlinks 的歌曲被使用得越广泛，音乐版权的线上线下验证和商业授权将变得越容易。

@@ -15,6 +15,9 @@ module.exports = {
     themeConfig: {
         displayAllHeaders: true,
         search: false,
+        repo: 'soundlinks/developer.soundlinks.net',
+        docsDir: 'docs',
+        editLinks: true,
         locales: {
             '/': {
                 nav: [
@@ -39,10 +42,6 @@ module.exports = {
                             },
                         ],
                     },
-                    {
-                        text: 'Soundlinks',
-                        link: 'https://soundlinks.net',
-                    },
                 ],
                 sidebar: [
                     '/introduction/',
@@ -55,6 +54,7 @@ module.exports = {
                 selectText: 'Language',
                 label: 'English',
                 lastUpdated: 'Last updated at',
+                editLinkText: 'Help us edit this page',
             },
             '/zh/': {
                 nav: [
@@ -79,10 +79,6 @@ module.exports = {
                             },
                         ],
                     },
-                    {
-                        text: 'Soundlinks',
-                        link: 'https://soundlinks.net',
-                    },
                 ],
                 sidebar: [
                     '/zh/introduction/',
@@ -95,6 +91,7 @@ module.exports = {
                 selectText: '语言',
                 label: '简体中文',
                 lastUpdated: '最后更新于',
+                editLinkText: '帮助修改本页',
             },
         },
     },
