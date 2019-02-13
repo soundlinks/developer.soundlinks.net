@@ -13,7 +13,7 @@ sidebarDepth: 1
 
 :::
 
-为了请求其它 API，比如「[编码 API](/zh/encoding/)」，你需要**自己**生成 token。
+要请求我们的 API，你需要**手动**生成 token。
 
 请求 API 的参数将用 [JWT（JSON Web Tokens）](https://jwt.io/) 加密后传输，以验证使用方的身份和参数的合法性。开发者可根据使用环境选择合适的库进行接下来的步骤。
 
@@ -52,7 +52,7 @@ $ npm install -S jsonwebtoken
 - `url` API 的请求 URL
 - `arg` API 的请求参数
 
-以「[自动编码 API](/zh/encoding/#开始自动编码)」为例，生成完整 JWT 的代码如下：
+以「[自动编码](/zh/encoding/#开始自动编码)」API 为例，生成完整 JWT 的代码如下：
 
 ```js
 const jwt = require("jsonwebtoken");

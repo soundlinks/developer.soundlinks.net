@@ -8,7 +8,7 @@ sidebarDepth: 1
 
 ![Soundlinks Encoding Service Diagram](./sequence.png)
 
-## API - 开始自动编码
+## API - 自动编码
 
 ### 请求
 
@@ -22,8 +22,10 @@ POST /v3/sl/encoding
 
 | 字段 | 类型 | 备注 |
 | ----- | ---- | ---- |
-| src | string | 歌曲链接 |
 | artist | string | 作者名字 |
+| file | string | 歌曲 URL |
+| title | string | 歌曲标题 |
+| thumbnail | string | 歌曲封面 URL |
 
 #### 请求参数
 
@@ -61,6 +63,7 @@ POST /v3/sl/query
 
 返回的编码状态有以下可能：
 
+- null
 - processing
 - complete
 - failed
@@ -68,7 +71,6 @@ POST /v3/sl/query
 | 字段 | 类型 | 备注 |
 | ----- | ---- | ---- |
 | status | string | 编码状态 |
-| message | string | 编码信息 |
 
 ## 验证 Soundlinks
 

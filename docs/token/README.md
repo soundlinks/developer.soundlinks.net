@@ -13,9 +13,9 @@ When you get here, it's assumed that you have already known how to generate the 
 
 :::
 
-In order to request other APIs, e.g. "[Encoding API](/encoding/)", you need to generate the data token **by yourself**.
+In order to request our APIs, you need to generate token **manually**.
 
-All API parameters will be transmitted after [JWT (JSON Web Tokens)](https://jwt.io/) encryption to verify user's credentials and parameter's legality. The developers may choose any libraries as they wish depending on the development environment before proceeding to next steps.
+All API parameters will be encrypted by [JWT (JSON Web Tokens)](https://jwt.io/) before transmission for verifying the user credential and parameter legality. The developers may choose any libraries as they wish depending on the development environment before proceeding to next steps.
 
 The following example to generate token is based on Node.js, and other language and environment is similar. If you have any issues when generating token, please contact us for help.
 
@@ -52,7 +52,7 @@ Required JWT payload including:
 - `url` API's request URL
 - `arg` API's request parameters
 
-Taking "[Auto encoding API](/encoding/#api-start-auto-encoding)" for example, the complete code to generate JWT is like the following:
+Taking "[Start encoding](/encoding/#api-start-auto-encoding)" API for example, the complete code to generate JWT is like the following:
 
 ```js
 const jwt = require("jsonwebtoken");

@@ -8,7 +8,7 @@ You can use our encoding service to create your own song with Soundlinks. The pr
 
 ![Soundlinks Encoding Service Diagram](./sequence.png)
 
-## API - Start auto encoding
+## API - Start encoding
 
 ### Request
 
@@ -22,8 +22,10 @@ POST /v3/sl/encoding
 
 | Parameter | Type | Comment |
 | ----- | ---- | ---- |
-| src | string | Link of song |
-| artist | string | Artist's name |
+| artist | string | Artist name |
+| file | string | Song URL |
+| title | string | Song title |
+| thumbnail | string | Song thumbnail URL |
 
 #### Parameters for request
 
@@ -61,6 +63,7 @@ POST /v3/sl/query
 
 These are the possible encoding status:
 
+- null
 - processing
 - complete
 - failed
@@ -68,7 +71,6 @@ These are the possible encoding status:
 | Parameter | Type | Comment |
 | ----- | ---- | ---- |
 | status | string | Encoding status |
-| message | string | Encoding message |
 
 ## Verifying Soundlinks
 
