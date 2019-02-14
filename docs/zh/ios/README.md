@@ -31,7 +31,7 @@ $ pod install
 
 初始化一个 `SLRecognizer`，像这样开始：
 
-```objective-c
+```objectivec
 #import "ViewController.h"
 #import "SLRecognizer.h"
 
@@ -53,13 +53,13 @@ $ pod install
 
 ### 开始识别
 
-```objective-c
+```objectivec
 [[SLRecognizer sharedInstance] enable];
 ```
 
 ### 识别结果的代理
 
-```objective-c
+```objectivec
 - (void)recognizer:(SLRecognizer *)recognizer code:(NSString *)code
 {
     NSLog(@"Soundlinks code = %@", code);
@@ -72,7 +72,7 @@ $ pod install
 
 将代理方法中的 `code` 转换成用来请求数据的 `token`，其有效期为 5 分钟。在有效期内可使用该 `token` 请求「[识别结果 API](/result/)」以获取歌曲最终的 Soundlinks 信息。
 
-```objective-c
+```objectivec
 NSString *token = [[SLRecognizer sharedInstance] getTokenWithCode:code];
 ```
 
@@ -84,7 +84,7 @@ NSString *token = [[SLRecognizer sharedInstance] getTokenWithCode:code];
 
 ### 停止识别
 
-```objective-c
+```objectivec
 [[SLRecognizer sharedInstance] disable];
 ```
 
