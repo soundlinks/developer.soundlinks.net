@@ -65,7 +65,7 @@ Create an `SLRecognizer` instance and register callback:
 SLRecognizer recognizer = new SLRecognizer(new SLRecognizerListener() {
     @Override
     public void onResult(String code) {
-
+        // result goes here
     }
 });
 ```

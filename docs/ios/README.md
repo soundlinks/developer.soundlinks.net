@@ -31,7 +31,7 @@ Don't forget checking whether microphone usage description has been added in app
 
 Firstly initialize `SLRecognizer` like this：
 
-```objectivec
+```objective-c
 #import "ViewController.h"
 #import "SLRecognizer.h"
 
@@ -53,13 +53,13 @@ Firstly initialize `SLRecognizer` like this：
 
 ### Starting recognizer
 
-```objectivec
+```objective-c
 [[SLRecognizer sharedInstance] enable];
 ```
 
 ### Delegate for the result
 
-```objectivec
+```objective-c
 - (void)recognizer:(SLRecognizer *)recognizer code:(NSString *)code
 {
     NSLog(@"Soundlinks code = %@", code);
@@ -72,7 +72,7 @@ The `code` here is not readable, you need to invoke the method of generating `to
 
 Convert `code` got in the delegate to `token` in order to request data, which will be expired in 5 minutes. During that period of time, you can get final Soundlinks information with the `token` by requesting [Recognition result API](/result/).
 
-```objectivec
+```objective-c
 NSString *token = [[SLRecognizer sharedInstance] getTokenWithCode:code];
 ```
 
@@ -87,7 +87,7 @@ NSString *token = [[SLRecognizer sharedInstance] getTokenWithCode:code];
 
 ### Stopping recognizer
 
-```objectivec
+```objective-c
 [[SLRecognizer sharedInstance] disable];
 ```
 

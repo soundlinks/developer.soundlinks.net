@@ -65,7 +65,7 @@ Soundlinks.init(this, appId, appSecret, false);
 SLRecognizer recognizer = new SLRecognizer(new SLRecognizerListener() {
     @Override
     public void onResult(String code) {
-
+        // result goes here
     }
 });
 ```
