@@ -14,7 +14,7 @@ For mobile phones, we provide [iOS](/ios/) and [Android](/android/) SDK to recog
 
 ## Creating Soundlinks
 
-To create a new song with Soundlinks, you can request "[Encoding API](/encoding/)".
+To create a new song with Soundlinks, you can request "[start encoding API](/api/#start-encoding)".
 
 ::: tip Note
 

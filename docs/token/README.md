@@ -52,7 +52,7 @@ Required JWT payload including:
 - `url` API's request URL
 - `arg` API's request parameters (excluding base URL)
 
-Taking "[Start encoding](/encoding/#api-start-auto-encoding)" API for example, the complete code to generate JWT is like the following:
+Taking "[start encoding API](/api/#start-encoding)" for example, the complete code to generate JWT is like the following:
 
 ```js
 const jwt = require("jsonwebtoken");

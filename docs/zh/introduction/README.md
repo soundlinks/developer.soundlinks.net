@@ -14,7 +14,7 @@ sidebarDepth: 1
 
 ## 创建 Soundlinks
 
-如果要创建新的 Soundlinks 歌曲，可以请求「[编码 API](/encoding/)」。
+如果要创建新的 Soundlinks 歌曲，可以请求「[自动编码 API](/zh/api/#自动编码)」。
 
 ::: tip 说明
 

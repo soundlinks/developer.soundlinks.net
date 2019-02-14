@@ -86,7 +86,7 @@ recognizer.stop();
 
 ### 生成 token
 
-将回调中的 `code` 转换成用来请求数据的 `token`，其有效期为 5 分钟。在有效期内可使用该 `token` 请求「[识别结果 API](/result/)」以获取歌曲最终的 Soundlinks 信息。
+将回调中的 `code` 转换成用来请求数据的 `token`，其有效期为 5 分钟。在有效期内可使用该 `token` 请求「[识别结果 API](/zh/api/#获取识别结果)」以获取歌曲最终的 Soundlinks 信息。
 
 ```java
 String token = SoundlinksJWT.getInstance().generateToken(code);

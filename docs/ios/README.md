@@ -70,7 +70,7 @@ The `code` here is not readable, you need to invoke the method of generating `to
 
 ### Generating token
 
-Convert `code` got in the delegate to `token` in order to request data, which will be expired in 5 minutes. During that period of time, you can get final Soundlinks information with the `token` by requesting [Recognition result API](/result/).
+Convert `code` got in the delegate to `token` in order to request data, which will be expired in 5 minutes. During that period of time, you can get final Soundlinks information with the `token` by requesting "[recognition result API](/api/#get-recognition-result)".
 
 ```objectivec
 NSString *token = [[SLRecognizer sharedInstance] getTokenWithCode:code];

@@ -86,7 +86,7 @@ recognizer.stop();
 
 ### Generating token
 
-Convert the `code` got in the callback to `token` in order to request data, which will be expired in 5 minutes. During that time you can get final Soundlinks information with the `token` by requesting [Recognition result API](/result/).
+Convert the `code` got in the callback to `token` in order to request data, which will be expired in 5 minutes. During that time you can get final Soundlinks information with the `token` by requesting "[recognition result API](/api/#get-recognition-result)".
 
 ```java
 String token = SoundlinksJWT.getInstance().generateToken(code);

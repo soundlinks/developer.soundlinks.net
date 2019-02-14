@@ -52,7 +52,7 @@ $ npm install -S jsonwebtoken
 - `url` API 的请求 URL
 - `arg` API 的请求参数（不含基地址）
 
-以「[自动编码](/zh/encoding/#开始自动编码)」API 为例，生成完整 JWT 的代码如下：
+以「[自动编码 API](/zh/api/#自动编码)」为例，生成完整 JWT 的代码如下：
 
 ```js
 const jwt = require("jsonwebtoken");
