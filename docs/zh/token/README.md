@@ -65,7 +65,7 @@ const token = jwt.sign({
     iat: Math.floor(Date.now() / 1000),
     mtd: 'POST',
     url: '/v3/sl/encoding',
-    arg: { src: 'https://example.com/song.mp3' },
+    arg: { file: 'https://example.com/dummy.mp3' },
 }, APP_SECRET);
 ```
 

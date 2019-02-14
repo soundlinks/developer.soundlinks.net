@@ -15,7 +15,7 @@ When you get here, it's assumed that you have already known how to generate the 
 
 In order to request our APIs, you need to generate token **manually**.
 
-All API parameters will be encrypted by [JWT (JSON Web Tokens)](https://jwt.io/) before transmission for verifying the user credential and parameter legality. The developers may choose any libraries as they wish depending on the development environment before proceeding to next steps.
+All API parameters will be encrypted by [JWT (JSON Web Tokens)](https://jwt.io/) before transmission for verifying user credential and parameter legality. The developers may choose any libraries as they wish depending on the development environment before proceeding to next steps.
 
 The following example to generate token is based on Node.js, and other language and environment is similar. If you have any issues when generating token, please contact us for help.
 
@@ -65,7 +65,7 @@ const token = jwt.sign({
     iat: Math.floor(Date.now() / 1000),
     mtd: 'POST',
     url: '/v3/sl/encoding',
-    arg: { src: 'https://example.com/song.mp3' },
+    arg: { file: 'https://example.com/dummy.mp3' },
 }, APP_SECRET);
 ```
 
