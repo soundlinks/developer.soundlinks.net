@@ -48,9 +48,9 @@ $ npm install -S jsonwebtoken
 
 - `iss` 即 `APP_ID`
 - `iat` 请求当时的时间戳（秒）
-- `mtd` API 的请求方法，如 POST、PUT……（大写）
+- `mtd` API 的请求方法，如 POST、PUT…（大写）
 - `url` API 的请求 URL
-- `arg` API 的请求参数
+- `arg` API 的请求参数（不含基地址）
 
 以「[自动编码](/zh/encoding/#开始自动编码)」API 为例，生成完整 JWT 的代码如下：
 

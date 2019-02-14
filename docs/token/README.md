@@ -50,7 +50,7 @@ Required JWT payload including:
 - `iat` The current timestamp (in second)
 - `mtd` API's request method, like POST, PUT… (uppercase)
 - `url` API's request URL
-- `arg` API's request parameters
+- `arg` API's request parameters (excluding base URL)
 
 Taking "[Start encoding](/encoding/#api-start-auto-encoding)" API for example, the complete code to generate JWT is like the following:
 
