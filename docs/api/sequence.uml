@@ -1,13 +1,11 @@
-title Soundlinks Encoding Service
-
-note left of You: Token as request data
+title Soundlinks 编码音频的流程
 
 note left of You: Prepare media URL
-You->+Soundlinks: Request encoding media
+You->+Soundlinks: Request encoding api
 Soundlinks-->-You: Response query info
 
-note left of You: after a few minutes
+note left of You: waiting for several minutes
 You->+Soundlinks: Query encoding result
-Soundlinks-->-You: Response encoded media
+Soundlinks-->-You: Response encoded file
 
-note left of You: Validate
+note left of You: Recognize with mobile apps

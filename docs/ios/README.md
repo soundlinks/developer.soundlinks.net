@@ -4,9 +4,9 @@ sidebarDepth: 1
 
 # iOS SDK
 
-## Installation
+## 安装
 
-### Using CocoaPods
+### 使用 CocoaPods
 
 ```ruby
 # Podfile
@@ -14,22 +14,22 @@ pod 'Soundlinks-iOS-SDK'
 ```
 
 ```bash
-$ pod setup    # recommended
+$ pod setup    # 推荐
 $ pod install
 ```
 
-Don't forget checking whether microphone usage description has been added in app's **Info.plist** file:
+不要忘记检查 **Info.plist** 中是否已添加麦克风使用权限：
 
 ```xml
 <key>NSMicrophoneUsageDescription</key>
-<string>Using SOUNDLINKS service needs to enable your microphone</string>
+<string>接入 SOUNDLINKS 服务需要打开麦克风</string>
 ```
 
-## Usage
+## 使用方法
 
-### Initialization
+### 初始化
 
-Firstly initialize `SLRecognizer` like this：
+初始化一个 `SLRecognizer`，像这样开始：
 
 ```objectivec
 #import "ViewController.h"
@@ -51,13 +51,13 @@ Firstly initialize `SLRecognizer` like this：
 @end
 ```
 
-### Starting recognizer
+### 开始识别
 
 ```objectivec
 [[SLRecognizer sharedInstance] enable];
 ```
 
-### Delegate for the result
+### 识别结果的代理
 
 ```objectivec
 - (void)recognizer:(SLRecognizer *)recognizer code:(NSString *)code
@@ -66,32 +66,13 @@ Firstly initialize `SLRecognizer` like this：
 }
 ```
 
-The `code` here is not readable, you need to invoke the method of generating `token` followed.
-
-### Generating token
-
-Convert `code` got in the delegate to `token` in order to request data, which will be expired in 5 minutes. During that period of time, you can get final Soundlinks information with the `token` by requesting "[recognition result API](/api/#get-recognition-result)".
-
-```objectivec
-NSString *token = [[SLRecognizer sharedInstance] getTokenWithCode:code];
-```
-
-::: tip Why code and token？
-
-`code` is like a song's ID which is unique for each one. `token` is used for two reasons:
-
-- Every APP has its different usage, so we let developers to decide when to fire the network request.
-- To save the time for developers to generate signature by themselves, we wrap up this method to generate `token`.
-
-:::
-
-### Stopping recognizer
+### 停止识别
 
 ```objectivec
 [[SLRecognizer sharedInstance] disable];
 ```
 
-## Feedback
+## 反馈建议
 
-If you have any issues or suggestions, please [submit here](https://github.com/soundlinks/Soundlinks-iOS-SDK/issues/new) and we are ready to help.
+有任何问题和建议请在此[提出](https://github.com/soundlinks/Soundlinks-iOS-SDK/issues/new) ，我们会及时处理。
 

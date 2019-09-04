@@ -4,111 +4,94 @@ sidebarDepth: 1
 
 # API
 
-## Introduction
+## 介绍
 
-Our API is RESTful, uses [JWT](https://jwt.io/) as authentication, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP  status codes.
+我们的 API 遵循 RESTful 风格，通过 [JWT](https://jwt.io/) 进行验证，接受 JSON 编码的请求，返回 JSON 编码的结果，并使用标准的 HTTP 状态码。
 
-The base URL is:
-
-```
-https://api.soundlinks.net
-```
-
-Please note that in the following API documentation, "parameters in JWT payload" means the parameters which should be included in payload `arg` when [generating token](/token/), while "parameters for request" means the parameter which is sent in the request body when requesting an API.
-
-## Get recognition result
-
-Get recognition result of Soundlinks for iOS & Android SDK. Please read the related SDK documentation first.
-
-### Request
+基地址是：
 
 ```
-POST /v3/sl/result
+https://api.soundlinks.net/v3
 ```
 
-#### Parameters for request
+## 身份验证
 
-| Parameter | Type | Comment |
+在使用以下 API 时，除非在说明里指出“无需验证”，其它情况一律需要在 request header 里带上 `Authorization: Bearer {token}`。调用此 API 来获取 `token`，过期时间为 30 天。
+
+```
+POST /organization/token
+```
+
+#### 请求参数
+
+| 字段 | 类型 | 备注 |
 | ----- | ---- | ---- |
-| data | string | Data token |
+| appId | string | APP ID |
+| appKey | string | APP Key |
 
-### Response
+### 返回
 
-| Parameter | Type | Comment |
+| 字段 | 类型 | 备注 |
 | ----- | ---- | ---- |
-| media | object | Copyright information |
-| links | object | Media links |
+| token | string | JWT token
 
-## Start encoding
+## 编码音频
 
-You can use our encoding service to create your own song with Soundlinks. The process is as the following diagram:
+你可以使用编码服务来创建属于自己的带有 Soundlinks 的音频文件。流程如下图所示：
 
-![Soundlinks Encoding Service Diagram](./sequence.png)
+![Soundlinks Encoding Service Diagram](./sequence.jpg)
 
-### Request
+### 请求
 
-This API only accepts media `file` URL as one of parameter, so you need to upload a song which will be encoded to a remote server in advance.
+该接口参数 `file` 仅接受音频文件的 URL，所以需要事先把待编码的音频上传到服务器。
 
 ```
 POST /v3/sl/encoding
 ```
 
-#### Parameters in JWT payload
+#### 请求参数
 
-| Parameter | Type | Comment |
+| 字段 | 类型 | 备注 |
 | ----- | ---- | ---- |
-| artist | string | Artist name |
-| file | string | Song URL |
-| title | string | Song title |
-| thumbnail | string | Song thumbnail URL |
+| artist | string | 作者名字 |
+| file | string | 音频 URL |
+| title | string | 音频标题 |
+| thumbnail | string | 音频封面 URL |
 
-#### Parameters for request
+### 返回
 
-| Parameter | Type | Comment |
+| 字段 | 类型 | 备注 |
 | ----- | ---- | ---- |
-| data | string | Data token |
+| error | string | 错误信息 |
+| success | boolean | 成功标识 |
+| code | string | Soundlinks ID |
 
-### Response
+## 查询编码结果
 
-| Parameter | Type | Comment |
-| ----- | ---- | ---- |
-| query | string | Query credential |
+由于完成编码需要几分钟时间，你可以用返回的 `code` 去查询音频的编码结果。
 
-## Query encoding result
-
-
-Since the encoding may take several minutes to complete, you can use the `query` code to query the encoding result of your song.
-
-### Request
+### 请求
 
 ```
-POST /v3/sl/query
+GET /sl/encoding/progress/{query}
 ```
 
-#### Parameters in JWT payload
+#### 请求参数
 
-| Parameter | Type | Comment |
+| 字段 | 类型 | 备注 |
 | ----- | ---- | ---- |
-| query | string | Query credential |
+| query | string | Soundlinks ID |
 
-#### Parameters for request
+### 返回
 
-| Parameter | Type | Comment |
-| ----- | ---- | ---- |
-| data | string | Data token |
-
-### Response
-
-These are the possible encoding status:
+返回的编码状态有以下可能：
 
 - null
 - processing
 - complete
 - failed
 
-| Parameter | Type | Comment |
+| 字段 | 类型 | 备注 |
 | ----- | ---- | ---- |
-| encodedUrl | string | Encoded song URL |
-| status | string | Encoding status |
-
-For verifying Soundlinks, please use the [SOUNDLINKS APP](https://soundlinks.net/apps) or try our SDK.
+| status | string | 编码状态 |
+| encodedFile | string | 编码后的音频 URL |

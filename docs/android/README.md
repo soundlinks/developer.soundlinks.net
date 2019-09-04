@@ -4,11 +4,11 @@ sidebarDepth: 1
 
 # Android SDK
 
-## Installation
+## 安装
 
-### Configuring gradle
+### 配置 gradle
 
-Add these lines in project's **build.gradle**:
+在项目下的 **build.gradle** 添加：
 
 ```groovy
 allprojects {
@@ -20,7 +20,7 @@ allprojects {
 }
 ```
 
-Add these lines in app's **build.gradle**:
+在 app 下的 **build.gradle** 添加：
 
 ```groovy
 dependencies {
@@ -28,38 +28,38 @@ dependencies {
 }
 ```
 
-### Editing manifest.xml
+### 编辑 manifest.xml
 
 ```xml
-<!-- Configure microphone permission -->
+<!-- 配置麦克风权限 -->
 <uses-permission android:name="android.permission.RECORD_AUDIO"/>
 <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
 
-<!-- Add appId and appSecret in application -->
+<!-- 在 application 节点配置 appId 和 appSecret -->
 <meta-data android:name="SOUNLINKS_APPID" android:value="appId"/>
 <meta-data android:name="SOUNLINKS_APPSECRET" android:value="appSecret"/>
 ```
 
-## Usage
+## 使用方法
 
-### Initialization
+### 初始化
 
 ```java
 Soundlinks.init(this, appId, appSecret, false);
 ```
 
-Arguments notes:
+参数说明：
 
-| Argument | comment |
+| 参数 | 说明 |
 |:----:|:----: |
-| `Context context` | Context |
-| `String appId` | APP_ID，configurable in manifest |
-| `String appSecret` | APP_SECRET，configurable in manifest |
-| `Boolean isLog` | Log on/off |
+| `Context context` | 上下文 |
+| `String appId` | APP_ID，可在清单文件配置 |
+| `String appSecret` | APP_SECRET，可在清单文件配置 |
+| `Boolean isLog` | 是否开启日志 |
 
-### Creating `SLRecognizer`
+### 创建 `SLRecognizer`
 
-Create an `SLRecognizer` instance and register callback:
+创建 `SLRecognizer` 实例，并注册回调监听：
 
 ```java
 SLRecognizer recognizer = new SLRecognizer(new SLRecognizerListener() {
@@ -70,40 +70,23 @@ SLRecognizer recognizer = new SLRecognizer(new SLRecognizerListener() {
 });
 ```
 
-The `code` here is not readable, you need to invoke the method of generating `token` followed.
+识别到的 `code` 并不可读，需要调用下方生成 `token` 的方法。
 
-### Starting recognizer
+### 开始识别
 
 ```java
 recognizer.start();
 ```
 
-### Stopping recognizer
+### 停止识别
 
 ```java
 recognizer.stop();
 ```
 
-### Generating token
-
-Convert the `code` got in the callback to `token` in order to request data, which will be expired in 5 minutes. During that time you can get final Soundlinks information with the `token` by requesting "[recognition result API](/api/#get-recognition-result)".
-
-```java
-String token = SoundlinksJWT.getInstance().generateToken(code);
-```
-
-::: tip Why code and token？
-
-`code` is like a song's ID which is unique for each one. `token` is used for two reasons:
-
-- Every APP has its different usage, so we let developers to decide when to fire the network request.
-- To save the time for developers to generate signature by themselves, we wrap up this method to generate `token`.
-
-:::
-
 ### ProGuard
 
-Depending on your ProGuard config and usage, you may need to include the following lines:
+根据你的 ProGuard 配置，可以添加以下内容：
 
 ```
 # soundlinks
@@ -121,6 +104,6 @@ Depending on your ProGuard config and usage, you may need to include the followi
 -dontwarn org.bouncycastle.**
 ```
 
-## Feedback
+## 反馈建议
 
-If you have any issues or suggestions, please [submit here](https://github.com/soundlinks/Soundlinks-Android-SDK/issues/new) and we are ready to help.
+有任何问题和建议请在此[提出](https://github.com/soundlinks/Soundlinks-Android-SDK/issues/new) ，我们会及时处理。
