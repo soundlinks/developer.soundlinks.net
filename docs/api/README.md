@@ -46,7 +46,7 @@ POST /organization/token
 该接口参数 `file` 仅接受音频文件的 URL，所以需要事先把待编码的音频上传到服务器。
 
 ```
-POST /v3/sl/encoding
+POST /sl/encoding
 ```
 
 #### 请求参数
@@ -64,11 +64,12 @@ POST /v3/sl/encoding
 | ----- | ---- | ---- |
 | error | string | 错误信息 |
 | success | boolean | 成功标识 |
+| query | string | 查询凭证 |
 | code | string | Soundlinks ID |
 
 ## 查询编码结果
 
-由于完成编码需要几分钟时间，你可以用返回的 `code` 去查询音频的编码结果。
+由于完成编码需要几分钟时间，你可以用编码 API 返回的 `query` 字段查询音频的编码结果。
 
 ### 请求
 
