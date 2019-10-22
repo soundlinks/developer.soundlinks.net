@@ -43,7 +43,7 @@ POST /organization/token
 
 ### 请求
 
-该接口参数 `file` 仅接受音频文件的 URL，所以需要事先把待编码的音频上传到服务器。
+该接口参数 `file` 仅接受音频文件的 URL，所以需要事先把待编码的音频上传到服务器（暂只支持 wav/mp3 格式的音频）。
 
 ```
 POST /sl/encoding
@@ -54,9 +54,9 @@ POST /sl/encoding
 | 字段 | 类型 | 备注 |
 | ----- | ---- | ---- |
 | artist | string | 作者名字 |
-| file | string | 音频 URL |
-| title | string | 音频标题 |
-| thumbnail | string | 音频封面 URL |
+| file | string | 文件 URL |
+| title | string | 文件标题 |
+| thumbnail | string | 封面 URL |
 
 ### 返回
 
@@ -81,7 +81,7 @@ GET /sl/encoding/progress/{query}
 
 | 字段 | 类型 | 备注 |
 | ----- | ---- | ---- |
-| query | string | Soundlinks ID |
+| query | string | 查询凭证 |
 
 ### 返回
 
@@ -95,4 +95,37 @@ GET /sl/encoding/progress/{query}
 | 字段 | 类型 | 备注 |
 | ----- | ---- | ---- |
 | status | string | 编码状态 |
-| encodedFile | string | 编码后的音频 URL |
+| encodedFile | string | 编码后的文件 URL |
+
+## 解码音频
+
+通过 URL 解码出音频中的 Soundlinks ID（暂只支持 wav 格式的音频）。
+
+### 请求
+
+```
+POST /sl/decoding
+```
+
+#### 请求参数
+
+| 字段 | 类型 | 备注 |
+| ----- | ---- | ---- |
+| file | string | 文件 URL |
+| callbackUrl | string | 解码完成后的回调地址 |
+
+### 返回
+
+| 字段 | 类型 | 备注 |
+| ----- | ---- | ---- |
+| id | string | 解码任务 ID |
+
+待 Soundlinks 解码完成后，会把结果以 JSON 格式 POST 到指定的 `callbackUrl`。POST 内容中的 `id` 为解码任务 ID，`code` 为 Soundlinks ID。示例：
+
+```json
+{
+    "id": "95803265-b7af-c8ae-b2a3-16ee44c0b11a",
+    "code": "4Npl1dGQwv6R"
+}
+
+```
