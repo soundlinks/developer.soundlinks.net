@@ -63,7 +63,6 @@ POST /sl/encoding
 | 字段 | 类型 | 备注 |
 | ----- | ---- | ---- |
 | error | string | 错误信息 |
-| success | boolean | 成功标识 |
 | query | string | 查询凭证 |
 | code | string | Soundlinks ID |
 
@@ -99,7 +98,7 @@ GET /sl/encoding/progress/{query}
 
 ## 解码音频
 
-通过 URL 解码出音频中的 Soundlinks ID（暂只支持 wav 格式的音频）。
+通过 URL 解码出音频中的 Soundlinks ID（暂只支持 wav/mp3 格式的音频）。
 
 ### 请求
 
@@ -127,5 +126,4 @@ POST /sl/decoding
     "id": "95803265-b7af-c8ae-b2a3-16ee44c0b11a",
     "code": "4Npl1dGQwv6R"
 }
-
 ```
