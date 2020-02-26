@@ -8,11 +8,8 @@ sidebarDepth: 1
 
 我们的 API 遵循 RESTful 风格，通过 [JWT](https://jwt.io/) 进行验证，接受 JSON 编码的请求，返回 JSON 编码的结果，并使用标准的 HTTP 状态码。
 
-基地址是：
-
-```
-https://api.soundlinks.net/v3
-```
+- 生产环境 Base URL：https://api.soundlinks.net/v3
+- 测试环境 Base URL：https://stage-api.soundlinks.net/v3
 
 ## 身份验证
 
@@ -113,6 +110,8 @@ POST /sl/decoding
 | file | string | 文件 URL |
 | callbackUrl | string | 解码完成后的回调地址 |
 
+如果 `callbackUrl` 使用 Base URL，Soundlinks 将会保存解码结果，开发者可使用下面的 API 查询解码结果。
+
 ### 返回
 
 | 字段 | 类型 | 备注 |
@@ -125,5 +124,36 @@ POST /sl/decoding
 {
     "id": "95803265-b7af-c8ae-b2a3-16ee44c0b11a",
     "code": "4Npl1dGQwv6R"
+}
+```
+
+## 查询解码结果
+
+通过“解码任务 ID”查询解码结果。
+
+### 请求
+
+```
+GET /sl/decoding/job/{id}
+```
+
+#### 请求参数
+
+| 字段 | 类型 | 备注 |
+| ----- | ---- | ---- |
+| id | string | 解码任务 ID |
+
+### 返回
+
+| 字段 | 类型 | 备注 |
+| ----- | ---- | ---- |
+| result | object | 解码结果 |
+
+示例：
+
+```json
+{
+    "id": "e0cb3b4a-0aee-5b7f-1a37-f9a233dc0d51",
+    "code": "LNownme2Ob4Z"
 }
 ```
