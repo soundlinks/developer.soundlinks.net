@@ -8,8 +8,7 @@ sidebarDepth: 1
 
 我们的 API 遵循 RESTful 风格，通过 [JWT](https://jwt.io/) 进行验证，接受 JSON 编码的请求，返回 JSON 编码的结果，并使用标准的 HTTP 状态码。
 
-- 生产环境 Base URL：https://api.soundlinks.net/v3
-- 测试环境 Base URL：https://stage-api.soundlinks.net/v3
+Base URL：https://stage-api.soundlinks.net/v3
 
 ## 身份验证
 
@@ -19,7 +18,7 @@ sidebarDepth: 1
 POST /organization/token
 ```
 
-#### 请求参数
+**请求参数**
 
 | 字段 | 类型 | 备注 |
 | ----- | ---- | ---- |
@@ -46,14 +45,28 @@ POST /organization/token
 POST /sl/encoding
 ```
 
-#### 请求参数
+**请求参数**
 
 | 字段 | 类型 | 备注 |
 | ----- | ---- | ---- |
-| artist | string | 作者名字 |
 | file | string | 文件 URL |
-| title | string | 文件标题 |
-| thumbnail | string | 封面 URL |
+| title | string | 文件名称 |
+| artist | string | 作者名字（如测试用，可传任意值）|
+| thumbnail | string | 封面 URL（如测试用，可传任意值）|
+
+**示例**
+
+```
+curl --location --request POST 'https://stage-api.soundlinks.net/v3/sl/encoding' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data-raw '
+  "file": "https://foo.com/bar.mp3",
+  "title": "bar-encoding",
+  "artist": "john lennon",
+  "thumbnail": "thumbnail.png"
+}'
+```
 
 ### 返回
 
@@ -73,7 +86,7 @@ POST /sl/encoding
 GET /sl/encoding/progress/{query}
 ```
 
-#### 请求参数
+**请求参数**
 
 | 字段 | 类型 | 备注 |
 | ----- | ---- | ---- |
@@ -103,14 +116,12 @@ GET /sl/encoding/progress/{query}
 POST /sl/decoding
 ```
 
-#### 请求参数
+**请求参数**
 
 | 字段 | 类型 | 备注 |
 | ----- | ---- | ---- |
 | file | string | 文件 URL |
 | callbackUrl | string | 解码完成后的回调地址 |
-
-如果 `callbackUrl` 使用 Base URL，Soundlinks 将会保存解码结果，开发者可使用下面的 API 查询解码结果。
 
 ### 返回
 
@@ -120,12 +131,7 @@ POST /sl/decoding
 
 待 Soundlinks 解码完成后，会把结果以 JSON 格式 POST 到指定的 `callbackUrl`。POST 内容中的 `id` 为解码任务 ID，`code` 为 Soundlinks ID。示例：
 
-```json
-{
-    "id": "95803265-b7af-c8ae-b2a3-16ee44c0b11a",
-    "code": "4Npl1dGQwv6R"
-}
-```
+如果 `callbackUrl` 填写了 Base URL，Soundlinks 将会保存解码结果，开发者可使用下面的 API 查询解码结果。
 
 ## 查询解码结果
 
@@ -137,7 +143,7 @@ POST /sl/decoding
 GET /sl/decoding/job/{id}
 ```
 
-#### 请求参数
+**请求参数**
 
 | 字段 | 类型 | 备注 |
 | ----- | ---- | ---- |
@@ -147,13 +153,5 @@ GET /sl/decoding/job/{id}
 
 | 字段 | 类型 | 备注 |
 | ----- | ---- | ---- |
-| result | object | 解码结果 |
-
-示例：
-
-```json
-{
-    "id": "e0cb3b4a-0aee-5b7f-1a37-f9a233dc0d51",
-    "code": "LNownme2Ob4Z"
-}
-```
+| id | string | 解码任务 ID |
+| code | string | Soundlinks ID |
