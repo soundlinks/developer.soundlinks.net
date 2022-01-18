@@ -155,3 +155,26 @@ GET /sl/decoding/job/{id}
 | ----- | ---- | ---- |
 | id | string | 解码任务 ID |
 | code | string | Soundlinks ID |
+
+## 解析
+
+将 Soundlinks ID 解析为可读数据。
+
+### 请求
+
+```
+GET /sl/decoding/code/{id}
+```
+
+**请求参数**
+
+| 字段 | 类型 | 备注 |
+| ----- | ---- | ---- |
+| id | string | Soundlinks ID |
+
+### 返回
+
+| 字段 | 类型 | 备注 |
+| ----- | ---- | ---- |
+| data0 | integer | 数据 0 |
+| data1 | integer | 数据 1 |
