@@ -8,19 +8,27 @@ module.exports = {
         '/': {
             lang: 'zh-CN',
         },
+        '/en/': {
+            lang: 'en-US',
+        },
     },
     themeConfig: {
         displayAllHeaders: true,
         search: false,
-        // repo: 'soundlinks/developer.soundlinks.net',
+        repo: 'soundlinks/developer.soundlinks.net',
         docsDir: 'docs',
         editLinks: true,
+        sidebar: 'auto',
         locales: {
             '/': {
                 nav: [
                     {
                         text: '开始使用',
                         link: '/introduction/',
+                    },
+                    {
+                        text: 'API',
+                        link: '/api/',
                     },
                     {
                         text: '联系我们',
@@ -36,15 +44,39 @@ module.exports = {
                         ],
                     },
                 ],
-                sidebar: [
-                    '/introduction/',
-                    '/ios/',
-                    '/api/',
-                ],
                 selectText: '语言',
                 label: '简体中文',
                 lastUpdated: '最后更新于',
                 editLinkText: '帮助修改本页',
+            },
+            '/en/': {
+                nav: [
+                    {
+                        text: 'Start here',
+                        link: '/en/introduction/',
+                    },
+                    {
+                        text: 'API',
+                        link: '/en/api/',
+                    },
+                    {
+                        text: 'Contact us',
+                        items: [
+                            {
+                                text: 'Email',
+                                link: 'mailto:dev@soundlinks.net',
+                            },
+                            {
+                                text: 'Issues',
+                                link: 'https://github.com/soundlinks/developer.soundlinks.net/issues/new',
+                            },
+                        ],
+                    },
+                ],
+                selectText: 'Languages',
+                label: 'English',
+                lastUpdated: 'Last Updated',
+                editLinkText: 'Improve this page',
             },
         },
     },

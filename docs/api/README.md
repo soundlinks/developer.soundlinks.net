@@ -1,5 +1,5 @@
 ---
-sidebarDepth: 1
+sidebarDepth: 0
 ---
 
 # API
@@ -8,11 +8,17 @@ sidebarDepth: 1
 
 我们的 API 遵循 RESTful 风格，通过 [JWT](https://jwt.io/) 进行验证，接受 JSON 编码的请求，返回 JSON 编码的结果，并使用标准的 HTTP 状态码。
 
-Base URL：https://stage-api.soundlinks.net/v3
+Base URL：
+
+```
+https://stage-api.soundlinks.net/v3
+```
 
 ## 身份验证
 
 在使用以下 API 时，除非在说明里指出“无需验证”，其它情况一律需要在 request header 里带上 `Authorization: Bearer {token}`。调用此 API 来获取 `token`，过期时间为 30 天。
+
+### 请求
 
 ```
 POST /organization/token
@@ -32,10 +38,6 @@ POST /organization/token
 | token | string | JWT token
 
 ## 编码音频
-
-你可以使用编码服务来创建属于自己的带有 Soundlinks 的音频文件。流程如下图所示：
-
-![Soundlinks Encoding Service Diagram](./sequence.jpg)
 
 ### 请求
 
@@ -129,9 +131,9 @@ POST /sl/decoding
 | ----- | ---- | ---- |
 | id | string | 解码任务 ID |
 
-待 Soundlinks 解码完成后，会把结果以 JSON 格式 POST 到指定的 `callbackUrl`。POST 内容中的 `id` 为解码任务 ID，`code` 为 Soundlinks ID。示例：
+待 Soundlinks 解码完成后，会把结果以 JSON 格式 POST 到指定的 `callbackUrl`。POST 内容中的 `id` 为解码任务 ID。
 
-如果 `callbackUrl` 填写了 Base URL，Soundlinks 将会保存解码结果，开发者可使用下面的 API 查询解码结果。
+**如果 `callbackUrl` 填写了 Base URL，Soundlinks 将会保存解码结果，开发者可使用下面的 API 查询解码结果。**
 
 ## 查询解码结果
 

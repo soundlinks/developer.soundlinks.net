@@ -1,5 +1,5 @@
 ---
-sidebarDepth: 1
+sidebarDepth: 0
 ---
 
 # API
@@ -11,91 +11,88 @@ Our API is RESTful, uses [JWT](https://jwt.io/) as authentication, accepts JSON-
 The base URL is:
 
 ```
-https://api.soundlinks.net
+https://stage-api.soundlinks.net/v3
 ```
 
-Please note that in the following API documentation, "parameters in JWT payload" means the parameters which should be included in payload `arg` when [generating token](/token/), while "parameters for request" means the parameter which is sent in the request body when requesting an API.
+## Authentication
 
-## Get recognition result
-
-Get recognition result of Soundlinks for iOS & Android SDK. Please read the related SDK documentation first.
+To use our API, an access token must be included in the request header, like `Authorization: Bearer {token}`. Please request this API to get your token, it is valid for 30 days.
 
 ### Request
 
 ```
-POST /v3/sl/result
+POST /organization/token
 ```
 
-#### Parameters for request
+**Parameters**
 
 | Parameter | Type | Comment |
 | ----- | ---- | ---- |
-| data | string | Data token |
+| appId | string | APP ID |
+| appKey | string | APP Key |
 
 ### Response
 
 | Parameter | Type | Comment |
 | ----- | ---- | ---- |
-| media | object | Copyright information |
-| links | object | Media links |
+| token | string | JWT token |
 
 ## Start encoding
 
-You can use our encoding service to create your own song with Soundlinks. The process is as the following diagram:
-
-![Soundlinks Encoding Service Diagram](./sequence.png)
-
 ### Request
 
-This API only accepts media `file` URL as one of parameter, so you need to upload a song which will be encoded to a remote server in advance.
+This API requires `file` URL as one of parameter, so you need to upload the audio file which to be encoded to a remote server in advance (temporarily supporting wav/mp3 audio only).
 
 ```
-POST /v3/sl/encoding
+POST /sl/encoding
 ```
 
-#### Parameters in JWT payload
+**Parameters**
 
 | Parameter | Type | Comment |
 | ----- | ---- | ---- |
-| artist | string | Artist name |
-| file | string | Song URL |
-| title | string | Song title |
-| thumbnail | string | Song thumbnail URL |
+| file | string | File URL |
+| title | string | File title |
+| artist | string | Artist name (pass any value for testing) |
+| thumbnail | string | Thumbnail URL (pass any value for testing) |
 
-#### Parameters for request
+**Example**
 
-| Parameter | Type | Comment |
-| ----- | ---- | ---- |
-| data | string | Data token |
+```
+curl --location --request POST 'https://stage-api.soundlinks.net/v3/sl/encoding' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data-raw '
+  "file": "https://foo.com/bar.mp3",
+  "title": "bar-encoding",
+  "artist": "john lennon",
+  "thumbnail": "thumbnail.png"
+}'
+```
 
 ### Response
 
 | Parameter | Type | Comment |
 | ----- | ---- | ---- |
+| error | string | Error message |
 | query | string | Query credential |
+| code | string | Soundlinks ID |
 
 ## Query encoding result
 
-
-Since the encoding may take several minutes to complete, you can use the `query` code to query the encoding result of your song.
+Since the encoding may take several minutes to complete, you can use the `query` code to query the encoding result of your audio file.
 
 ### Request
 
 ```
-POST /v3/sl/query
+GET /sl/encoding/progress/{query}
 ```
 
-#### Parameters in JWT payload
+**Parameters**
 
 | Parameter | Type | Comment |
 | ----- | ---- | ---- |
 | query | string | Query credential |
-
-#### Parameters for request
-
-| Parameter | Type | Comment |
-| ----- | ---- | ---- |
-| data | string | Data token |
 
 ### Response
 
@@ -108,7 +105,78 @@ These are the possible encoding status:
 
 | Parameter | Type | Comment |
 | ----- | ---- | ---- |
-| encodedUrl | string | Encoded song URL |
 | status | string | Encoding status |
+| encodedFile | string | Encoded file URL |
 
-For verifying Soundlinks, please use the [SOUNDLINKS APP](https://soundlinks.net/apps) or try our SDK.
+## Start decoding
+
+Decode the Soundlinks ID of an audio file based on its URL (temporarily supporting wav/mp3 audio only).
+
+### Request
+
+```
+POST /sl/decoding
+```
+
+**Parameters**
+
+| Parameter | Type | Comment |
+| ----- | ---- | ---- |
+| file | string | File URL |
+| callbackUrl | string | Callback URL to receive decoding result |
+
+### Response
+
+| Parameter | Type | Comment |
+| ----- | ---- | ---- |
+| id | string | Decoding task ID |
+
+After the decoding task is completed, the result will be posted as JSON format to the specific `callbackUrl`. The `id` in the responsed content is decoding task ID.
+
+**If `callbackUrl` equals to our base URL, Soundlinks will save the decoding result and developers can query the result using the next API.**
+
+## Query decoding result
+
+Query the decoding result with decoding task ID.
+
+### Request
+
+```
+GET /sl/decoding/job/{id}
+```
+
+**Parameters**
+
+| Parameter | Type | Comment |
+| ----- | ---- | ---- |
+| id | string | Decoding task ID |
+
+### Response
+
+| Parameter | Type | Comment |
+| ----- | ---- | ---- |
+| id | string | Decoding task ID |
+| code | string | Soundlinks ID |
+
+## Decrypt
+
+Decrypt Soundlinks ID to readable data。
+
+### Request
+
+```
+GET /sl/decoding/code/{id}
+```
+
+**Parameters**
+
+| Parameter | Type | Comment |
+| ----- | ---- | ---- |
+| id | string | Soundlinks ID |
+
+### Response
+
+| Parameter | Type | Comment |
+| ----- | ---- | ---- |
+| data0 | integer | Data 0 |
+| data1 | integer | Data 1 |

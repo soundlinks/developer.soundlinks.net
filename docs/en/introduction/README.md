@@ -1,5 +1,5 @@
 ---
-sidebarDepth: 1
+sidebarDepth: 0
 ---
 
 # Start here
@@ -10,11 +10,11 @@ Every developer needs to be reviewed by us, after that, you will get `APP_ID` an
 
 ## Recognizing Soundlinks
 
-For mobile phones, we provide [iOS](/ios/) and [Android](/android/) SDK to recognize Soundlinks via microphones. After 3rd-party APP integrates with the SDK, it has capability to recognize Soundlinks in a song for its both copyright information and media links set by the song owner.
+For mobile phones, we provide iOS and Android SDK to recognize Soundlinks via microphones. After 3rd-party APP integrates with the SDK, it has capability to recognize Soundlinks in a song for its both copyright information and media links set by the song owner.
 
 ## Creating Soundlinks
 
-To create a new song with Soundlinks, you can request "[start encoding API](/api/#start-encoding)".
+To create a new song with Soundlinks, you can request "[Start encoding API](/en/api/#start-encoding)".
 
 ::: tip Note
 

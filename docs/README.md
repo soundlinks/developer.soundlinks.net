@@ -1,5 +1,6 @@
 ---
 editLink: false
+sidebar: false
 ---
 
 # 基于 Soundlinks 创建应用
