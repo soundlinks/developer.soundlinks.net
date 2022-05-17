@@ -11,7 +11,7 @@ sidebarDepth: 0
 Base URL：
 
 ```
-https://stage-api.soundlinks.net/v3
+https://stage-api.soundlinks.net:2022/v3
 ```
 
 ## 身份验证
@@ -43,6 +43,8 @@ POST /organization/token
 
 该接口参数 `file` 仅接受音频文件的 URL，所以需要事先把待编码的音频上传到服务器（暂只支持 wav/mp3 格式的音频）。
 
+> 由于测试服务器资源有限，建议使用时长小于 2 分钟的音频文件进行测试。
+
 ```
 POST /sl/encoding
 ```
@@ -59,7 +61,7 @@ POST /sl/encoding
 **示例**
 
 ```
-curl --location --request POST 'https://stage-api.soundlinks.net/v3/sl/encoding' \
+curl --location --request POST 'https://stage-api.soundlinks.net:2022/v3/sl/encoding' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <token>' \
 --data-raw '
@@ -133,7 +135,7 @@ POST /sl/decoding
 
 待 Soundlinks 解码完成后，会把结果以 JSON 格式 POST 到指定的 `callbackUrl`。POST 内容中的 `id` 为解码任务 ID。
 
-**如果 `callbackUrl` 填写了 Base URL，Soundlinks 将会保存解码结果，开发者可使用下面的 API 查询解码结果。**
+**如果 `callbackUrl` 填写了 `https://stage-api.soundlinks.net/v3`，Soundlinks 将会保存解码结果，开发者可使用下面的 API 查询解码结果。**
 
 ## 查询解码结果
 

@@ -11,7 +11,7 @@ Our API is RESTful, uses [JWT](https://jwt.io/) as authentication, accepts JSON-
 The base URL is:
 
 ```
-https://stage-api.soundlinks.net/v3
+https://stage-api.soundlinks.net:2022/v3
 ```
 
 ## Authentication
@@ -43,6 +43,8 @@ POST /organization/token
 
 This API requires `file` URL as one of parameter, so you need to upload the audio file which to be encoded to a remote server in advance (temporarily supporting wav/mp3 audio only).
 
+> Due to limited resource of the testing server, it is recommended to use audio files that shorter than 2 minutes to test.
+
 ```
 POST /sl/encoding
 ```
@@ -59,7 +61,7 @@ POST /sl/encoding
 **Example**
 
 ```
-curl --location --request POST 'https://stage-api.soundlinks.net/v3/sl/encoding' \
+curl --location --request POST 'https://stage-api.soundlinks.net:2022/v3/sl/encoding' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <token>' \
 --data-raw '
@@ -133,7 +135,7 @@ POST /sl/decoding
 
 After the decoding task is completed, the result will be posted as JSON format to the specific `callbackUrl`. The `id` in the responsed content is decoding task ID.
 
-**If `callbackUrl` equals to our base URL, Soundlinks will save the decoding result and developers can query the result using the next API.**
+**If `callbackUrl` equals to `https://stage-api.soundlinks.net/v3`, Soundlinks will save the decoding result and developers can query the result using the next API.**
 
 ## Query decoding result
 
