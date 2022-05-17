@@ -133,7 +133,7 @@ POST /sl/decoding
 | ----- | ---- | ---- |
 | id | string | Decoding task ID |
 
-After the decoding task is completed, the result will be posted as JSON format to the specific `callbackUrl`. The `id` in the responsed content is decoding task ID.
+After the decoding task is completed, the result will be posted as JSON format to the specific `callbackUrl`. The `id` in the response is decoding task ID.
 
 **If `callbackUrl` equals to `https://stage-api.soundlinks.net/v3`, Soundlinks will save the decoding result and developers can query the result using the next API.**
 
